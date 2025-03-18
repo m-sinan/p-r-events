@@ -1,11 +1,22 @@
-import express from 'express';
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import { connectDB } from "./config/db.js";
+import staffRoutes from "./routes/Staff.Route.js";
 
 const app = express();
 
-app.get('/', (req, res) => {
-    res.send('server is ready');
-    });
+dotenv.config();
 
-    app.listen(8000, () => {
-        console.log('Server at http://localhost:8000');
-    });
+app.use(express.json());
+
+app.use(cors());
+
+const PORT = process.env.PORT || 8000;
+
+app.use("/api/staffs", staffRoutes)
+
+app.listen(PORT, () => {
+  connectDB();
+  console.log("server started at http://localhost:" + PORT);
+});
