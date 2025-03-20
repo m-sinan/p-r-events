@@ -1,8 +1,16 @@
 import Attendance from '../models/Attendance.js';
+import Staffs from '../models/staff_profile.js';
 
 export const submitAttendance = async (req, res) => {
   const { staff_Id } = req.body;
   try {
+    // Check if the staffId exists
+    const staff = await Staffs.findOne({ staff_Id });
+    if (!staff) {
+      return res.status(404).json({ message: 'Staff ID not found' });
+    }
+
+    // Submit attendance
     const newAttendance = new Attendance({ staff_Id });
     await newAttendance.save();
     res.status(201).json(newAttendance);
