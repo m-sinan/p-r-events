@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 router.post('/', submitAttendance);
-router.get('/:staff_Id', getAttendance);
+router.get('/:param', getAttendance);
 router.delete('/:id', deleteAttendance);
-
+// router.get('/:location', getAttendanceByLocation);
 export default router;

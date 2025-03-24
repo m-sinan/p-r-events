@@ -20,10 +20,8 @@ const staffsscheema = new mongoose.Schema({
     },
     profileImage: {
         type: String,
-        required: true
     },
 },
-
 {
     timestamps: true //createdAt, updatedAt
 });
